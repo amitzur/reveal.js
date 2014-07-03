@@ -177,15 +177,28 @@ body {
 
 @-webkit-keyframes move1 {
   from {
+    -webkit-transform: translateX(0); }
+
+  to {
+    -webkit-transform: translateX(160px); } }
+
+@-webkit-keyframes move3 {
+  /*from { -webkit-transform: translateX(0); }*/
+  /*to { -webkit-transform: translateX(500px); }*/
+  from {
     -webkit-transform: translate3d(0, 0, 0); }
 
   to {
-    -webkit-transform: translate3d(160px, 0, 0); } }
+    -webkit-transform: translate3d(500px, 0, 0); }
+
+  /*from { margin-left: 0; }*/
+  /*to { margin-left: 500px; }*/ }
 
 .rect {
   height: 100px;
   width: 100px;
-  background: #dc322f; }
+  background: #dc322f;
+  position: relative; }
 
 .frame {
   font-family: "Lato", sans-serif;
@@ -278,3 +291,17 @@ html.experiment-5 .experiment-5 {
 
 html.experiment-6 .experiment-6 {
   display: block; }
+
+.erased {
+  color: #839496;
+  text-decoration: line-through; }
+
+.two {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  /*-webkit-transform: translateX(0);*/
+  -webkit-transition: -webkit-transform 1000ms linear;
+  transition: transform 1000ms linear; }
+
+.three.animated {
+  -webkit-animation: move3 1s infinite alternate linear; }

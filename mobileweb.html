@@ -175,12 +175,50 @@
                         "Native" has a broad meaning
                     </aside>
                 </section>
+
                 
                 <section>
-                    <h2>Application Cache</h2>
+                    <h2>Application Cache [1]</h2>
                     <ul>
-                        
+                        <li>Your friend for optimizing launch time</li>
+                        <li>Overcome latency</li>
+                        <li>Can contain code, css, images</li>
+                        <li>Implicitly caches the actual html, per URL (including query string)</li>
+                        <li>Dozens of MB's</li>
+                        <li>Can be leveraged with local storage and <span class="cyan">make you a hero</span></li>
                     </ul>
+
+                    <aside class="notes">
+                        1) scripts at the end of the body - not enough <br>
+                    </aside>
+                </section>
+                
+                <section>
+                    <h2>Application Cache [2]</h2>
+                    <ul>
+                        <li>
+                            <div>How to:</div>
+                            <ol>
+                                <li>Create manifest file</li>
+                                <li>
+                                    <div>Reference the manifest from your html</div>
+                                    <pre><code>
+    &lt;html manifest='url_to_myappcache.manifest'>
+                                    </code></pre>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            <div>Has JS API for methods and events</div>
+                        <pre><code>    window.applicationCache.addEventListener(updateready|downloaing|error|...);
+
+    window.applicationCache.update();
+
+    window.applicationCache.status;
+                        </code></pre>
+                        </li>
+                        <li class="red">Invalidation sucks :-(</li>
+                    </ul>    
                 </section>
 
                 <section>
@@ -203,15 +241,67 @@
                 </section>
                 
                 <section>
-                    <h2>Animations</h2>
+                    <h2>Animations [1]</h2>
+                    <ul>
+                        <li><span class="erased">Will</span> Could make the user stay with you after consuming the data</li>
+                        <li><span class="erased">Will</span> Could make the user wait for your data if you screw up</li>
+                        <li class="cyan">60 fps - good!</li>
+                        <li class="cyan">Stable 30 fps - not bad!</li>
+                        <li class="red">Beware of DOM style recalculations that may take up more than your 16ms!</li>
+                        <li class="fragment red">Janks :-((((((</li>
+                    </ul>
                 </section>
                 
-                <section data-state="experiment-1">
-
+                <section>
+                    <h2>Animations [2]</h2>
+                    <ul>
+                        <li>
+                            <div>Animate only paint-triggering properties</div>
+                            <small> <span class="cyan">[+] transform &nbsp;&nbsp;&nbsp; [+] opacity</span>&nbsp;&nbsp;&nbsp;<span class="red"> [-] left &nbsp;&nbsp;&nbsp; [-] width &nbsp;&nbsp;&nbsp; [-] margin</span></small>
+                        </li>
+                        <li>
+                            <div>requestAnimationFrame</div>
+                            <small class="red">[-] setTimeout</small>&nbsp;&nbsp;&nbsp;
+                            <small class="red">[-] setInterval</small>&nbsp;&nbsp;&nbsp;
+                            <small class="red">[-] jquery.animate()</small>&nbsp;&nbsp;&nbsp;
+                            <small class="cyan">[+] requestAnimationFrame</small>&nbsp;&nbsp;&nbsp;
+                        </li>
+                    </ul>
+                </section>
+                
+                <!--<section data-state="experiment-1"></section>-->
+                <section>
+                    <h2>Experiment</h2>
+                    <div class="test">
+                        <h5>jquery.animate() on left property</h5>
+                        <div id="rect-1" class="rect"></div>
+                        <button onclick="move1();">Move!</button>
+                    </div>
+                    <hr>
+                    <div>
+                        <h5>css transition on translateX</h5>
+                        <div id="rect-2" class="rect two"></div>
+                        <button onclick="move2();">Move!</button>
+                    </div>
+                    <hr>
+                    <div>
+                        <h5>css animation on translate3d</h5>
+                        <div id="rect-3" class="rect three"></div>
+                        <button onclick="move3();">Move!</button>
+                    </div>
+                    <button onclick="reset();">reset</button>
                 </section>
                 
                 <section>
                     <h2>Hardware Acceleration</h2>
+                    <div class="fragment">
+                        <h3>The well known hack: </h3>
+                        <pre><code>.rectangle { transform: translate3d(0,0,0); }</code></pre>    
+                    </div>
+                    
+                    <ul>
+                        
+                    </ul>
                 </section>
 
                 <section>
@@ -353,32 +443,46 @@
     <script src="js/jquery-1.7.2.js"></script>
     
     <script>
-        var filename = location.host === "127.0.0.1" ? "master" : "client";
         Reveal.initialize({
             slideNumber: true,
             history: true,
             embedded: false,
             
             multiplex: {
-                secret: location.host === '127.0.0.1' ? '14043251560102238946' : null,
-                id: '92ab0b6ab91c8f30',
-                url: '10.0.0.6:1948'
+                secret: null,
+                id: '',
+                url: 'http://ec2-54-176-63-44.us-west-1.compute.amazonaws.com:1948'
             },
             
             dependencies: [
                 { src: "js/socket.io.min.js" },
-                { src: "plugin/multiplex/" + filename + ".js", async: true },
-                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-//                { src: "plugin/multiplex/" + "master" + ".js", async: true },
-//                { src: "plugin/multiplex/" + "client" + ".js", async: true }
+                { src: "plugin/multiplex/client.js", async: true },
             ]
-//            parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg",
-//            parallaxBackgroundSize: "2100px 900px",
-//            transition: "linear"
         });
         
-        Reveal.addEventListener("")
+        function move1() {
+            $("#rect-1").animate({ left: 500 }, 1000, "linear");
+        }
+
+        function move2() {
+            var div2 = $("#rect-2")[0];
+            div2.style.webkitTransform = "translateX(500px)";
+            div2.style.transform = "translateX(500px)";
+        }
+
+        function move3() {
+            var div3 = $("#rect-3")[0];
+            div3.classList.add("animated");
+        }
         
+        function reset() {
+            $("#rect-1").css("left", 0);
+            var div2 = $("#rect-2")[0];
+            div2.style.webkitTransform = "none";
+            div2.style.transform = "none";
+            var div3 = $("#rect-3")[0];
+            div3.classList.remove("animated");
+        }
         
         $(function() {
             $(".log button").on("click", function() {
