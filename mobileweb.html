@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to do Mobile Web</title>
+
+    <meta name="description" content="How to code for mobile web and get a native-like experience">
+    <meta name="author" content="Amit Zur">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    
+    
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <section>
+                <h1>The Mobile Web</h1>
+                <h2>Why like this?</h2>
+                <p>
+                    <small>Created by Amit Zur / <a href="http://twitter.com/amitzur">@amitzur</a></small>
+                </p>
+                <aside class="notes">Notes for presentation</aside>
+            </section>
+
+
+            <section>
+                <h2>Agenda</h2>
+                <div>
+                    <ul>
+                        <li>Why</li>
+                        <li>What</li>
+                        <li>When</li>
+                        <li>How</li>
+                    </ul>
+                </div>
+                <div  class="fragment red" style="margin-top:50px;">
+                    <span>Time permitting:</span><br>
+                    <ul>
+                        <li>Who</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <section id="about-me">
+                    <h2>About the Speaker</h2>
+                    <ul>
+                        <li><img src="img/avatar1.jpg" alt=""/>Web Developer Since 2008</li>
+                        <li><img src="img/capriza.png" alt=""/>Working on mobile & desktop frontend at Capriza</li>
+                        <li><img class="avatar-2" src="img/avatar2.jpg" alt=""/>Passionate about de-bulshitting the web, coding, UX, etc.</li>
+                    </ul>    
+                </section>
+                
+            </section>
+            
+            <section>
+                <section>
+                    <h1>why</h1>
+                    <ul>
+                        <li>
+                            <div class="">Native has amazing capabilities...</div>
+                            <span class="red">but coded for each platform</span>
+                        </li>
+                        <li class="fragment">
+                            <div class="">HTML can be coded once and run everywhere...</div>
+                            <div class="red">but not optimized for the platform...
+                                <span class="fragment cyan watermark">out of the box</span></div>
+                        </li>
+
+                    </ul>    
+                </section>
+                
+                <section>
+                    <h2>Native abilities</h2>
+                    <h3>Which can we use?</h3>
+                    <ul>
+                        <li>Performance</li>
+                        <li>Animations</li>
+                        <li>Sensors - geolocation, gyro, accelerometer, camera</li>
+                        <li>Interaction w/ other apps</li>
+                        <li>File System</li>
+                        <li>Complete control of keyboard and touch</li>
+                        <li>Background jobs - push notifications</li>
+                        <li>Inherent support for resolutions</li>
+                        <li class="cyan fragment">Probably more that I forgot...</li>
+                    </ul>
+                </section>
+                    
+                <section>
+                    <h1>Mobile !== Desktop</h1>
+                    <ol style="-webkit-column-count:3;" class="comparison">
+                        <li class="fragment">Slower CPU</li>
+                        <li class="fragment">Weaker Graphics</li>
+                        <li class="fragment">Worse, unstable connectivity</li>
+                        <li class="fragment">Flawed HTML support
+                            <ul>
+                                <li>fixed position</li>
+                                <li>css overflow</li>
+                                <li>scroll events</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Different interface
+                            <ul>
+                                <li>touch</li>
+                                <li>Virtual Keyboard</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">Profile of usage</li>
+                        <li class="fragment">Compared to other native apps
+                            <small>(With their native UI)</small>
+                        </li>
+                        <br>
+                        <li class="fragment">
+                            Support Matrix
+                            <ul>
+                                <li>OS</li>
+                                <li>OS Version</li>
+                                <li>Screen Size</li>
+                                <li>Aspect Ratio</li>
+                                <li>CSS pixel ratio</li>
+                                <li>Orientation</li>
+                                <li>Vendor</li>
+                                <li>Browser</li>
+                                <li>Tablet (?)</li>
+                            </ul>
+                        </li>
+                            
+                    </ol>
+                    
+                    <aside class="notes">
+                        1) touch means that scrolling is like dragging (influences implementation)<br>
+                        2) touch means that clicking is like scrolling (affects :active)<br>
+                        3) Support matrix - different, more grave meaning than in desktop. If unsupported - it might just not work!
+                    </aside>
+                </section>
+                
+            </section>
+            
+            <section>
+                <section>
+                    <h1>What</h1>
+                    <h2 class="fragment gone">can you do?</h2>
+                    <h2 class="fragment"><span class="cyan">should </span>you do?</h2>    
+                </section>
+
+                <section>
+                    <h3>If I do ______ then it will <b><big>feel</big></b> native</h3>
+                    <aside class="notes">
+                        "Native" has a broad meaning
+                    </aside>
+                </section>
+                
+                <section>
+                    <h2>Application Cache</h2>
+                    <ul>
+                        
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Fonts</h2>
+                <pre><code>
+    &lt;link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,300italic,300,100italic,100,400italic,700,700italic,900,900italic"/&gt;
+                </code></pre>
+                <pre><code>
+    @font-face {
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 100;
+        src:    local('Lato Hairline'),
+        url(http://themes.googleusercontent.com/static/fonts/lato/...) format('woff');
+    }
+                </code></pre>
+                    <div class="fragment">
+                        <img src="img/font-waterfall.png" alt=""/>
+                    </div>
+                </section>
+                
+                <section>
+                    <h2>Animations</h2>
+                </section>
+                
+                <section data-state="experiment-1">
+
+                </section>
+                
+                <section>
+                    <h2>Hardware Acceleration</h2>
+                </section>
+
+                <section>
+                    <h2>Rendering Performance [1]</h2>
+                    <img src="img/jstoscreen.png" alt="" class="stretch"/>
+                    <small>https://docs.google.com/presentation/d/1CH8ifryioHDLT1Oryyy8amusUmq2FytpCPCpk0G3E4o/edit#slide=id.g174d07756_28</small>
+                </section>
+
+                <section>
+                    <h2>Rendering Performance [2]</h2>
+                    <img src="img/animating.png" class="stretch">
+                    <small>https://docs.google.com/presentation/d/1CH8ifryioHDLT1Oryyy8amusUmq2FytpCPCpk0G3E4o/edit#slide=id.g174d07756_28</small>
+                </section>
+
+                <section>
+                    <h2>Rendering Performance [3]</h2>
+                    <h4>Bad:</h4>
+                <pre><code>
+    .card { left: 0; transition: left 350ms; }
+
+    .card.repositioned { left: 100px; }
+                </code></pre>
+                    <h4>Good:</h4>
+                <pre><code>
+    .card { left: 0; transform: translateX(0); transition: transform 350ms; }
+
+    .card.repositioned { transform: translateX(100px); }}
+                </code></pre>
+                    <h4>Even better (sometimes):</h4>
+                <pre><code>
+    .card { left: 0; transform: translate3d(0,0,0); transition: transform 350ms; }
+
+    .card.repositioned { transform: translate3d(100px,0,0); }
+                </code></pre>
+
+                </section>
+                
+                <section>
+                    <h2>Scrollers</h2>
+                    <ul>
+                        <li>iScroll</li>
+                        <li>FT Scroller</li>
+                        <li>Sencha Scroller</li>
+                        <li>Zynga Scroller</li>
+                        <li>Scrollability</li>
+                        <li>ScrollView</li>
+                    </ul>
+                    <h3 class="fragment">Will get irrelevant with better HW and optimizations</h3>
+                </section>
+
+                <section data-state="experiment-2">
+
+                </section>
+                
+                
+                
+                
+                <!--
+                
+                <section>
+                    <h2>Knowing the enemy</h2>
+                    <div class="fragment">
+                        Animating the wrong properties can kill your experience
+                    <hr>
+                    </div>
+                    
+                    <div class="fragment">
+                        Scroll effects will not work
+                        
+                        <div class="fragment" style="position: relative;height:320px;background:url(http://www.presencethebook.com/images/book_background.jpg) no-repeat 50%;background-size:540px;">
+                            <span style="position:relative;left:-46px;top:108px;">The Story</span>
+                            <span class="fragment" style="position:relative;left:46px; top:108px;">of Scrolling</span>
+                        </div>
+                    </div>
+                </section>
+                
+                
+                
+                
+                <section>
+                    <img src="http://www.digitaltrends.com/wp-content/uploads/2013/04/maps-while-driving.jpg" alt=""/>
+                </section>
+                <section>
+                    <img src="http://www.michellealva.com/wp-content/uploads/2013/06/586-elevator-cellphones.jpg" alt="" class="stretch"/>
+                </section>
+                
+                -->
+            </section>
+
+            <section>
+                <h2>Tooling</h2>
+            </section>
+            
+            <section>
+                <h1>Thank You</h1>
+            </section>
+            
+            
+          
+            <section>
+                <h2>Links:</h2>
+                <ul>
+                    <li>Renderding performance:<br><small>https://www.youtube.com/watch?v=9xjpmpX4NJE</small></li>
+                    <li>GPU Accelerated composition in chrome:<br><small>http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome</small></li>
+                    <li>Breaking the 1000ms mobile glass barrier:<br><small>https://www.youtube.com/watch?v=Il4swGfTOSM</small></li>
+                    <li>Debugging the webkit graphics stack:<br><small>https://docs.google.com/a/capriza.com/presentation/d/1pw9kbUFMD7s9KME8yIsCpCNKaSwjkGa89tt4M5rxIGM/edit?forcehl=1&hl=en#slide=id.p</small></li>
+                    <li>A Beginner's Guide to Using the Application Cache:<br><small>http://www.html5rocks.com/en/tutorials/appcache/beginner/</small></li>
+                    <li>Jank Free:<br><small>http://jankfree.org/</small></li>
+                    <li>Web Latency Benchmark:<br><small>http://google.github.io/latency-benchmark/</small></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <div class="frame experiment-1">
+        <h2>Animation during scroll</h2>
+        <div class="frame-content">
+            <p>
+                WASHINGTON — The Supreme Court ruled on Monday that requiring family-owned corporations to pay for insurance
+            </p>
+            <div class="rect move-1"></div>
+            <p>coverage for contraception under the Affordable Care Act violated a federal law protecting religious freedom. It was, the dissent said, “a decision of startling breadth.”</p>
+        </div>
+    </div>
+    
+    <div class="frame experiment-2">
+        <h2>Scroll Events</h2>
+        <div class="frame-content">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
+        </div>
+        <div class="log">
+            <button>x</button>
+        </div>
+    </div>
+    
+    
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script src="js/jquery-1.7.2.js"></script>
+    
+    <script>
+        var filename = location.host === "127.0.0.1" ? "master" : "client";
+        Reveal.initialize({
+            slideNumber: true,
+            history: true,
+            embedded: false,
+            
+            multiplex: {
+                secret: location.host === '127.0.0.1' ? '14043251560102238946' : null,
+                id: '92ab0b6ab91c8f30',
+                url: '10.0.0.6:1948'
+            },
+            
+            dependencies: [
+                { src: "js/socket.io.min.js" },
+                { src: "plugin/multiplex/" + filename + ".js", async: true },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+//                { src: "plugin/multiplex/" + "master" + ".js", async: true },
+//                { src: "plugin/multiplex/" + "client" + ".js", async: true }
+            ]
+//            parallaxBackgroundImage: "https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg",
+//            parallaxBackgroundSize: "2100px 900px",
+//            transition: "linear"
+        });
+        
+        Reveal.addEventListener("")
+        
+        
+        $(function() {
+            $(".log button").on("click", function() {
+                $(this).parent().find("span,br").remove();
+            });
+            
+            var $log = $(".experiment-2 .log");
+            $(".experiment-2 .frame-content").on("scroll", function(e) {
+                $log.prepend("<span>scroll: " + e.target.scrollTop + "</span><br>");
+            });
+        });
+    </script>
+</body>
+</html>
