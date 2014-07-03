@@ -33,7 +33,12 @@
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
     
-    
+    <style>
+        #capriza-logo {
+            border: 0;
+            height: 80px;
+        }
+    </style>
 </head>
 <body>
     <div class="reveal">
@@ -45,7 +50,15 @@
                 <p>
                     <small>Created by Amit Zur / <a href="http://twitter.com/amitzur">@amitzur</a></small>
                 </p>
+                <br>
+                <p>
+                    run on your device: <a>http://bit.ly/TR8gDB</a>
+                </p>
                 <aside class="notes">Notes for presentation</aside>
+            </section>
+            
+            <section>
+                <img src="img/qr.png" alt="" class="stretch"/>
             </section>
 
 
@@ -75,6 +88,16 @@
                         <li><img src="img/capriza.png" alt=""/>Working on mobile & desktop frontend at Capriza</li>
                         <li><img class="avatar-2" src="img/avatar2.jpg" alt=""/>Passionate about de-bulshitting the web, coding, UX, etc.</li>
                     </ul>    
+                </section>
+                
+                <section id="about-capriza">
+                    <h2><img src="img/capriza_logo.png" alt="" id="capriza-logo"/></h2>
+                    <ul>
+                        <li>Mobility for the Enterprise</li>
+                        <li>Firefox in the backend</li>
+                        <li>Mobile browsers at the frontend</li>
+                        <li class="cyan">In short, we like the browser :-)</li>
+                    </ul>
                 </section>
                 
             </section>
@@ -296,11 +319,12 @@
                     <h2>Hardware Acceleration</h2>
                     <div class="fragment">
                         <h3>The well known hack: </h3>
-                        <pre><code>.rectangle { transform: translate3d(0,0,0); }</code></pre>    
+                        <pre><code>.rectangle { transform: translate3d(0,0,0); }</code></pre>
                     </div>
                     
-                    <ul>
-                        
+                    <ul class="fragment">
+                        <li>Layers</li>
+                        <li>GPU composition</li>
                     </ul>
                 </section>
 
@@ -318,6 +342,12 @@
 
                 <section>
                     <h2>Rendering Performance [3]</h2>
+                    <img src="img/compositing.png" alt=""/>
+                    <small>https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/graphics/CompositingReasons.h</small>
+                </section>
+
+                <section>
+                    <h2>Rendering Performance [4]</h2>
                     <h4>Bad:</h4>
                 <pre><code>
     .card { left: 0; transition: left 350ms; }
@@ -392,7 +422,18 @@
             </section>
 
             <section>
-                <h2>Tooling</h2>
+                <h2>Tooling, in short</h2>
+                <ul>
+                    <li>Chrome devtools:
+                    <ul style="margin-top:20px;">
+                        <li>remote inspection</li>
+                        <li>show paint rectangles</li>
+                        <li>show composited layer borders</li>
+                        <li>experiments - layers</li>
+                    </ul>
+                    </li>
+                    <li style="margin-top:30px;">Mozilla gaining momentum...</li>
+                </ul>
             </section>
             
             <section>
